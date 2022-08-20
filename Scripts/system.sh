@@ -23,3 +23,8 @@ echo ""
 echo "[SYSTEM] Update gem"
 gem update --system 
 echo ""
+
+echo "[SYSTEM] Enabling remote login via SSH"
+systemsetup -setremotelogin on
+echo ""
+

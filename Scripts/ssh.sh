@@ -5,6 +5,7 @@
 
 # EXECUTION
 
+
 read -p "[SSH] Create new SSH key (yes/no): " response
 if test "$response" = "yes"; then
 	echo ""

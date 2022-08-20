@@ -16,7 +16,7 @@ process_option() {
       source scripts/system.sh
       brew bundle
       bundle install
-      source scripts/dev.sh
+      #source scripts/dev.sh
       source scripts/git.sh
       source scripts/ssh.sh
       break;;
