@@ -28,3 +28,16 @@ echo "[SYSTEM] Enabling remote login via SSH"
 systemsetup -setremotelogin on
 echo ""
 
+read -p "[SYSTEM] Set new hostname? (yes/no): " response
+if test "$response" = "yes"; then
+        echo ""
+        read -p "Enter your e-mail: " newhostname
+        echo ""
+    echo "[SYSTEM] Setting new hostname to $newhostname"
+    scutil --set HostName $newhostname
+    scutil --set LocalHostName $newhostname
+    scutil --set ComputerName $newhostname
+    dscacheutil -flushcache
+fi
+echo "[SYSTEM] New hostname set to $newhostname"
+
