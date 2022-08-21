@@ -1,3 +1,16 @@
+# v1.0 from Hydramus
+
+This version is a fork from the original from https://github.com/danielsaidi/osx
+
+This has some new commands and also a build on the brew list to help cater to my stuff.
+
+This is mostly written in bash and should be easily readable and easily adaptable to any mac device.
+
+There may be the odd script that is hanging around from someone else but that is mostly for easy of use at the moment when deploying. Thanks to those developers! I should really be pulling and running latest versions of those said scripts in later versions
+
+---
+
+
 # OS X Setup Script
 
 This repository contains scripts that can be used to setup a brand new

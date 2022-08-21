@@ -12,6 +12,10 @@ else
 fi
 echo ""
 
+echo "[SYSTEM] to accomodate for Apple Silcon change to the pathing"
+echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zshrc
+echo ""
+
 echo "[SYSTEM] Install Homebrew Cask"
 brew tap caskroom/cask-cask
 echo ""
@@ -24,14 +28,25 @@ echo "[SYSTEM] Update gem"
 gem update --system 
 echo ""
 
+echo "[SYSTEM] Checking if device is apple silicon and needs Rosetta 2 installed"
+./rosetta-2-install.sh
+echo ""
+
+
 echo "[SYSTEM] Enabling remote login via SSH"
-systemsetup -setremotelogin on
+#!/bin/sh
+/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -targetdisk / -activate -configure -clientopts -setmenuextra -menuextra no 
+/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -targetdisk / -configure -users admin -access -on -privs -all
+/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -targetdisk / -configure -allowAccessFor -specifiedUsers -privs -all
+/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -targetdisk / -restart -agent -menu
+/usr/sbin/systemsetup -setremotelogin on
+/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -config -clientopts -setmenuextra -menuextra no
 echo ""
 
 read -p "[SYSTEM] Set new hostname? (yes/no): " response
 if test "$response" = "yes"; then
         echo ""
-        read -p "Enter your e-mail: " newhostname
+        read -p "Enter the new hostname: " newhostname
         echo ""
     echo "[SYSTEM] Setting new hostname to $newhostname"
     scutil --set HostName $newhostname
