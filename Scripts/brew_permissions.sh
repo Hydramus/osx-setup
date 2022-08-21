@@ -26,6 +26,10 @@ chmod -Rv g+w $(brew --prefix)/*
 
 #Allowing git config to add /opt/homebrew to safe directory
 git config --global --add safe.directory /opt/homebrew
+git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-cask
+git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-core
+git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-bundle
+
 
 echo "All brew folders have been updated with the new group"
 
