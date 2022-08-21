@@ -15,6 +15,7 @@ brew "watch"
 brew "tree"
 brew "nmap"
 
+
 # Apps
 cask "dropbox"
 cask "google-chrome"
@@ -27,7 +28,7 @@ cask "google-chat"
 cask "vlc"
 cask "the-unarchiver"
 cask "adobe-acrobat-reader"
-cask "apppolice"
+#cask "apppolice"
 cask "stats"
 cask "teamviewer"
 

@@ -11,14 +11,21 @@ echo "adding admin user to group."
 
 for i in $(dscl . list /Users | grep -v ^_ | grep -v nobody); do
     echo "dscl . append /Groups/brew GroupMembership $i"
-    do dscl . append /Groups/brew GroupMembership $i
+    dscl . append /Groups/brew GroupMembership $i
 done
 
 # can use this to check the group membership
 # dscacheutil -q group -a name brew
 
+echo "Adding brew group to all brew directories"
 #Change the group of homebrew installation directory
-sudo chgrp -R brew $(brew --prefix)/*
+chgrp -Rv brew $(brew --prefix)/*
 
 #Allow group members to write inside this directory 
-sudo chmod -R g+w $(brew --prefix)/* 
+chmod -Rv g+w $(brew --prefix)/* 
+
+#Allowing git config to add /opt/homebrew to safe directory
+git config --global --add safe.directory /opt/homebrew
+
+echo "All brew folders have been updated with the new group"
+
