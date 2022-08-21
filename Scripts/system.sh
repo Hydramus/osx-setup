@@ -56,3 +56,11 @@ if test "$response" = "yes"; then
 fi
 echo "[SYSTEM] New hostname set to $newhostname"
 
+echo "[SYSTEM] Set up default dock layout"
+cp -f "../configfiles/com.apple.dock.plist" "/Users/$loggedInUser/Library/Preferences/"
+defaults read "/Users/$loggedInUser/Library/Preferences/com.apple.dock.plist"
+killall Dock
+
+echo "[SYSTEM] Default dock layout configured"
+
+
