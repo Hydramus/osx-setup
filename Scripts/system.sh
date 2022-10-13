@@ -3,6 +3,8 @@
 # DESCRIPTION
 # Install System Software (e.g. Homebrew, Cask etc.)
 
+loggedInUser=$(/usr/bin/python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");')
+
 if ! command -v brew > /dev/null; then
     echo "[SYSTEM] Install Homebrew"
     ruby -e "$(curl --location --fail --silent --show-error https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -57,10 +59,9 @@ fi
 echo "[SYSTEM] New hostname set to $newhostname"
 
 echo "[SYSTEM] Set up default dock layout"
-cp -f "../configfiles/com.apple.dock.plist" "/Users/$loggedInUser/Library/Preferences/"
+cp -f "./configfiles/com.apple.dock.plist" "/Users/$loggedInUser/Library/Preferences/"
 defaults read "/Users/$loggedInUser/Library/Preferences/com.apple.dock.plist"
 killall Dock
 
 echo "[SYSTEM] Default dock layout configured"
-
 
