@@ -3,7 +3,9 @@
 # DESCRIPTION
 # Install System Software (e.g. Homebrew, Cask etc.)
 
-export loggedInUser=$(/usr/bin/python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");')
+loggedInUser=$(/usr/bin/python3 -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");')
+
+consoleuser=$(scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
 
 if ! command -v brew > /dev/null; then
     echo "[SYSTEM] Install Homebrew"
@@ -59,8 +61,8 @@ fi
 echo "[SYSTEM] New hostname set to $newhostname"
 
 echo "[SYSTEM] Set up default dock layout"
-cp -f "./configfiles/com.apple.dock.plist" "/Users/$loggedInUser/Library/Preferences/"
-defaults read "/Users/$loggedInUser/Library/Preferences/com.apple.dock.plist"
+cp -f "./configfiles/com.apple.dock.plist" "/Users/$consoleuser/Library/Preferences/"
+defaults read "/Users/$consoleuser/Library/Preferences/com.apple.dock.plist"
 killall Dock
 
 echo "[SYSTEM] Default dock layout configured"
