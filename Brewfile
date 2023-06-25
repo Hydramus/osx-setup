@@ -36,6 +36,7 @@ cask "adobe-creative-cloud"
 cask "stats"
 cask "teamviewer"
 cask "sketchup"
+cask "lulu"
 
 #cask "apppolice"
 #cask "postman"
