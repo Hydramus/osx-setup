@@ -12,6 +12,7 @@
 process_option() {
   case $1 in
     'all')
+      source scripts/autobrew.sh
       source scripts/config.sh
       source scripts/system.sh
       brew bundle
